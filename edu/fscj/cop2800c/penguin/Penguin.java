@@ -11,11 +11,16 @@ public class Penguin extends Bird {
     private String species;
     private double flipperLength;
 
-    // Constructor
-    public Penguin(int sampleNum, String species, 
-                   double culmenLength, double culmenDepth, 
-                   double bodyMass, String sex, double flipperLength) {
+    // Constructor, rethrows Bird's exception and checks Penguin fields
+    public Penguin(int sampleNum, String species, double culmenLength,
+                   double culmenDepth, double bodyMass, String sex,
+                   double flipperLength) throws InvalidBirdDataException {
         super(sampleNum, culmenLength, culmenDepth, bodyMass, sex);
+        // Reject a negative flipper length and a missing species
+        if (flipperLength < 0 || species == null || species.isEmpty()) {
+            throw new InvalidBirdDataException(
+                    "Invalid Penguin data encountered.");
+        }
         this.species = species;
         this.flipperLength = flipperLength;
     }

@@ -14,9 +14,17 @@ public class Bird implements Comparable<Bird> {
     private double bodyMass;
     private String sex;
 
-    // Constructor
-    public Bird(int sampleNum, double culmenLength, 
-                double culmenDepth, double bodyMass, String sex) {
+    // Constructor, throws an exception if any value is invalid
+    public Bird(int sampleNum, double culmenLength,
+                double culmenDepth, double bodyMass,
+                String sex) throws InvalidBirdDataException {
+        // Reject negative measurements and a missing sex
+        if (sampleNum < 0 ||
+                culmenLength < 0 || culmenDepth < 0 ||
+                bodyMass < 0 || sex == null || sex.isEmpty()) {
+            throw new InvalidBirdDataException(
+                    "Invalid Bird data encountered.");
+        }
         this.sampleNum = sampleNum;
         this.culmenLength = culmenLength;
         this.culmenDepth = culmenDepth;

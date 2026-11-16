@@ -92,6 +92,9 @@ public class PenguinAnalyzer {
                         count++; // Increment count after adding a penguin
                     } catch (NumberFormatException e) {
                         System.err.println("Skipping invalid row: " + line);
+                    } catch (InvalidBirdDataException e) {
+                        // Bad values: report and skip this penguin
+                        System.out.println(e);
                     }
                 } else {
                     System.err.println("Skipping malformed row: " + line);
